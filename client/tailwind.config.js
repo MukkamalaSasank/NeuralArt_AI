@@ -5,7 +5,26 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      // fontFamily: {
+      //   sans: ['Inter', 'sans-serif'],
+      // },
+
+      keyframes: {
+        slideInRight: {
+          '0%': { transform: 'translateX(100%)' },
+          '100%': { transform: 'translateX(0)' },
+        },
+        slideInLeft: {
+          '0%': { transform: 'translateX(-100%)' },
+          '100%': { transform: 'translateX(0)' },
+        },
+      },
+      animation: {
+        slideInRight: 'slideInRight 0.5s ease-in-out',
+        slideInLeft: 'slideInLeft 0.5s ease-in-out',
+      },
+    },
   },
   plugins: [],
 }

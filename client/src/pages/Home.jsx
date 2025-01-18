@@ -60,21 +60,27 @@ export default function Home() {
   };
 
   return (
-    <section className="max-w-xxl mx-auto p-10 bg-[#1e1e2e] text-white rounded-lg shadow-lg">
-      <div className="mb-12">
-        <h1 className="font-extrabold text-[#c4c4ff] text-[42px] leading-tight">
-          Explore AI-Generated Art
-        </h1>
-        <p className="mt-6 text-[#a8a8b3] text-lg leading-relaxed max-w-xxl">
-          Welcome to NeuralArt AI—a community-driven platform that transforms
-          your imaginations into reality. Describe your ideas, and let our
-          advanced AI create mesmerizing visuals for you. Browse stunning
-          creations or share your own masterpieces to inspire the world!
-        </p>
+    <div className="max-w-6xl mx-auto">
+      {/* Hero Section */}
+      <div className="bg-gradient-to-r from-[#1a1b26] to-[#24273a] rounded-3xl shadow-2xl overflow-hidden mb-8 p-12">
+        <div className="max-w-6xl flex flex-col justify-center items-center">
+          <h1 className="font-extrabold text-[#8c93ff] text-5xl leading-tight mb-6">
+            Explore AI-Generated Art
+          </h1>
+          <p className="text-gray-300 text-lg leading-relaxed">
+            Welcome to NeuralArt AI - a community-driven platform that transforms
+            your imaginations into reality. Describe your ideas, and let our
+            advanced AI create mesmerizing visuals for you. Browse stunning
+            creations or share your own masterpieces to inspire the world!
+          </p>
+        </div>
       </div>
 
-      <div className="mt-10">
-      <label className="text-white text-lg">Search Creations</label>
+      {/* Search Section */}
+      <div className="bg-[#1e1e2e] rounded-2xl shadow-lg p-8 mb-8">
+        <label className="text-[#8c93ff] text-lg font-medium block mb-4">
+          Search Creations
+        </label>
         <FormField
           type="text"
           name="text"
@@ -84,17 +90,18 @@ export default function Home() {
         />
       </div>
 
-      <div className="mt-12">
+      {/* Gallery Section */}
+      <div className="bg-[#1e1e2e] rounded-2xl shadow-lg p-8">
         {loading ? (
-          <div className="flex justify-center items-center">
+          <div className="flex justify-center items-center min-h-[200px]">
             <Loader />
           </div>
         ) : (
           <>
             {searchText && (
-              <h2 className="font-medium text-[#a8a8b3] text-xl mb-6">
+              <h2 className="font-medium text-[#8c93ff] text-xl mb-6">
                 Showing Results for{" "}
-                <span className="text-[#c4c4ff]">"{searchText}"</span>
+                <span className="text-white">"{searchText}"</span>
               </h2>
             )}
             <div className="grid lg:grid-cols-4 sm:grid-cols-3 xs:grid-cols-2 grid-cols-1 gap-6">
@@ -110,6 +117,6 @@ export default function Home() {
           </>
         )}
       </div>
-    </section>
+    </div>
   );
-}
+};
