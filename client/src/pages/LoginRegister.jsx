@@ -74,7 +74,7 @@ const LoginRegister = () => {
     setName("");
     setEmail("");
     setPassword("");
-    setShowPassword(false)
+    setShowPassword(false);
 
   };
 
