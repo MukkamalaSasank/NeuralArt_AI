@@ -5,6 +5,7 @@ import connectDB from "./mongodb/connect.js";
 import postRoutes from "./routes/postRoutes.js";
 import modelRoutes from "./routes/modelRoutes.js";
 import authRoutes from "./routes/authRoutes.js";
+import userRoutes from "./routes/userRoutes.js";
 
 dotenv.config();
 
@@ -14,6 +15,7 @@ app.use(express.json({ limit: "50mb" }));
 app.use('/api/v1/post', postRoutes);
 app.use('/api/v1/model', modelRoutes);
 app.use('/api/v1/auth', authRoutes);
+app.use('/api/v1/users', userRoutes);
 
 app.get("/", async (req, res) => {
   res.send("Hello from server");

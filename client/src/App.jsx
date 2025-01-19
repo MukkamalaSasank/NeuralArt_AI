@@ -5,17 +5,45 @@ import { Home, CreatePost, LoginRegister } from "./pages";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [user, setUser] = useState({});
 
   useEffect(() => {
     const token = localStorage.getItem("token");
-    if (token) {
+    const userId = localStorage.getItem("userId");
+
+    if (token && userId) {
+      fetchUserData(userId);
       setIsAuthenticated(true);
     }
-  });
+  }, []);
+
+  const fetchUserData = async (userId) => {
+    try {
+      const response = await fetch(
+        `http://localhost:8080/api/v1/users/${userId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
+
+      if (response.ok) {
+        const userData = await response.json();
+        setUser(userData);
+      } else {
+        console.error("Failed to fetch user data. Status:", response.status);
+      }
+    } catch (error) {
+      console.error("Error fetching user data:", error);
+    }
+  };
 
   const handleLogout = () => {
     localStorage.removeItem("token");
+    localStorage.removeItem("userId");
     setIsAuthenticated(false);
+    setUser(null);
     window.location.href = "/";
   };
 
@@ -33,13 +61,21 @@ function App() {
         {/* Navigation Links */}
         <nav className="hidden sm:flex items-center gap-5">
           {isAuthenticated ? (
-            <Link
-              to="/create-post"
-              className="bg-[#4c51c6] text-white py-2 px-4 rounded-md hover:bg-[#3b3fa3] transition-all"
-              aria-label="Create Post"
-            >
-              Create
-            </Link>
+            <>
+              <button
+                className="bg-green-700 text-white py-2 px-4 rounded-md hover:bg-green-600 transition-all"
+                onClick={() => {}}
+              >
+                Credits: {user.credits}
+              </button>
+              <Link
+                to="/create-post"
+                className="bg-[#4c51c6] text-white py-2 px-4 rounded-md hover:bg-[#3b3fa3] transition-all"
+                aria-label="Create Post"
+              >
+                Create
+              </Link>
+            </>
           ) : (
             <></>
           )}
@@ -103,7 +139,7 @@ function App() {
       <main className="sm:p-8 px-4 py-8 w-full min-h-screen bg-gradient-to-b from-[#1a1b26] via-[#24273a] to-[#1a1b26]">
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/create-post" element={<CreatePost />} />
+          <Route path="/create-post" element={<CreatePost user={user} setUser={setUser}/>} />
           <Route path="/login-register" element={<LoginRegister />} />
         </Routes>
       </main>

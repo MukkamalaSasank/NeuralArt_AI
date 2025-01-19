@@ -33,11 +33,24 @@ const LoginRegister = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [error, setError] = useState("");
 
   const togglePasswordVisibility = () => setShowPassword(!showPassword);
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
+    setError("");
+
+    // Basic validation
+    if (!email || !password) {
+      setError("Please fill in all fields.");
+      return;
+    }
+
+    if (!isLogin && !name) {
+      setError("Please fill in all fields.");
+      return;
+    }
 
     const url = "http://localhost:8080/api/v1/auth";
     const userData = isLogin
@@ -48,7 +61,7 @@ const LoginRegister = () => {
       const response = await fetch(url, {
         method: "POST",
         headers: {
-          "Content-Type": "application/json",
+          "Content-Type": "application/json", 
         },
         body: JSON.stringify(userData),
       });
@@ -57,15 +70,16 @@ const LoginRegister = () => {
 
       if (response.ok) {
         console.log(`${isLogin ? "Login" : "Register"} successful`);
-        localStorage.setItem("token", data.token); // Save token to localStorage
-        window.location.href = "/"; // Redirect to home page
+        localStorage.setItem("token", data.token);
+        localStorage.setItem("userId", data.user._id);
+        window.location.href = "/";
       } else {
         console.error(`${isLogin ? "Login" : "Register"} failed`, data.message);
-        alert(data.message); // Show error message to the user
+        setError(data.message || "Something went wrong. Please try again."); 
       }
     } catch (error) {
       console.error("Error:", error);
-      alert("Something went wrong. Please try again."); // Show generic error message
+      setError("Something went wrong. Please try again.");
     }
   };
 
@@ -75,7 +89,7 @@ const LoginRegister = () => {
     setEmail("");
     setPassword("");
     setShowPassword(false);
-
+    setError(""); 
   };
 
   return (
@@ -185,3 +199,5 @@ const LoginRegister = () => {
 };
 
 export default LoginRegister;
+
+
