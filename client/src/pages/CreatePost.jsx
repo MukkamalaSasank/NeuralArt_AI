@@ -42,7 +42,7 @@ export default function CreatePost({ user, setUser }) {
       try {
         setGenerateImg(true);
         const response = await fetch(
-          "https://neural-art-ai.vercel.app/api/v1/model",
+          "https://neuralart-ai.onrender.com/api/v1/model",
           {
             method: "POST",
             headers: {
@@ -58,7 +58,7 @@ export default function CreatePost({ user, setUser }) {
         setForm({ ...form, photo: `data:image/jpeg;base64,${data.photo}` });
 
         const deductCreditsResponse = await fetch(
-          `https://neural-art-ai.vercel.app/api/v1/users/${user._id}/credits`,
+          `https://neuralart-ai.onrender.com/api/v1/users/${user._id}/credits`,
           {
             method: "POST",
             headers: {
@@ -92,7 +92,7 @@ export default function CreatePost({ user, setUser }) {
 
       try {
         const response = await fetch(
-          "https://neural-art-ai.vercel.app/api/v1/post",
+          "https://neuralart-ai.onrender.com/api/v1/post",
           {
             method: "POST",
             headers: {

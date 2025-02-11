@@ -23,7 +23,7 @@ export default function Home() {
       setLoading(true);
       try {
         const response = await fetch(
-          "https://neural-art-ai.vercel.app/api/v1/post",
+          "https://neuralart-ai.onrender.com/api/v1/post",
           {
             method: "GET",
             headers: {

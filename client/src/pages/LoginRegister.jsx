@@ -52,7 +52,7 @@ const LoginRegister = () => {
       return;
     }
 
-    const url = "https://neural-art-ai.vercel.app/api/v1/auth";
+    const url = "https://neuralart-ai.onrender.com/api/v1/auth";
     const userData = isLogin
       ? { email, password, isLogin: true }
       : { name, email, password, isLogin: false };

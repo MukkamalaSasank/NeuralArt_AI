@@ -20,7 +20,7 @@ function App() {
   const fetchUserData = async (userId) => {
     try {
       const response = await fetch(
-        `https://neural-art-ai.vercel.app/api/v1/users/${userId}`,
+        `https://neuralart-ai.onrender.com/api/v1/users/${userId}`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
