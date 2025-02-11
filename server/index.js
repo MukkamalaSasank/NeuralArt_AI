@@ -29,7 +29,7 @@ app.get("/", (req, res) => {
 });
 
 // Define PORT for Render
-const PORT = process.env.PORT || 8080;
+const PORT = 8080;
 
 // Start Server
 const startServer = async () => {
