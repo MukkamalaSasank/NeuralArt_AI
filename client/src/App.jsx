@@ -20,7 +20,7 @@ function App() {
   const fetchUserData = async (userId) => {
     try {
       const response = await fetch(
-        `http://localhost:8080/api/v1/users/${userId}`,
+        `https://neural-art-ai.vercel.app/api/v1/users/${userId}`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -139,7 +139,10 @@ function App() {
       <main className="sm:p-8 px-4 py-8 w-full min-h-screen bg-gradient-to-b from-[#1a1b26] via-[#24273a] to-[#1a1b26]">
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/create-post" element={<CreatePost user={user} setUser={setUser}/>} />
+          <Route
+            path="/create-post"
+            element={<CreatePost user={user} setUser={setUser} />}
+          />
           <Route path="/login-register" element={<LoginRegister />} />
         </Routes>
       </main>

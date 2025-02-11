@@ -22,12 +22,15 @@ export default function Home() {
     const fetchPosts = async () => {
       setLoading(true);
       try {
-        const response = await fetch("http://localhost:8080/api/v1/post", {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
+        const response = await fetch(
+          "https://neural-art-ai.vercel.app/api/v1/post",
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
 
         if (response.ok) {
           const results = await response.json();
@@ -68,10 +71,11 @@ export default function Home() {
             Explore AI-Generated Art
           </h1>
           <p className="text-gray-300 text-lg leading-relaxed">
-            Welcome to NeuralArt AI - a community-driven platform that transforms
-            your imaginations into reality. Describe your ideas, and let our
-            advanced AI create mesmerizing visuals for you. Browse stunning
-            creations or share your own masterpieces to inspire the world!
+            Welcome to NeuralArt AI - a community-driven platform that
+            transforms your imaginations into reality. Describe your ideas, and
+            let our advanced AI create mesmerizing visuals for you. Browse
+            stunning creations or share your own masterpieces to inspire the
+            world!
           </p>
         </div>
       </div>
@@ -119,4 +123,4 @@ export default function Home() {
       </div>
     </div>
   );
-};
+}

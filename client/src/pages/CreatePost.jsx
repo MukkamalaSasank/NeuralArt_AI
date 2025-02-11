@@ -41,21 +41,24 @@ export default function CreatePost({ user, setUser }) {
 
       try {
         setGenerateImg(true);
-        const response = await fetch("http://localhost:8080/api/v1/model", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            prompt: form.prompt,
-          }),
-        });
+        const response = await fetch(
+          "https://neural-art-ai.vercel.app/api/v1/model",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              prompt: form.prompt,
+            }),
+          }
+        );
 
         const data = await response.json();
         setForm({ ...form, photo: `data:image/jpeg;base64,${data.photo}` });
 
         const deductCreditsResponse = await fetch(
-          `http://localhost:8080/api/v1/users/${user._id}/credits`,
+          `https://neural-art-ai.vercel.app/api/v1/users/${user._id}/credits`,
           {
             method: "POST",
             headers: {
@@ -88,13 +91,16 @@ export default function CreatePost({ user, setUser }) {
       setLoading(true);
 
       try {
-        const response = await fetch("http://localhost:8080/api/v1/post", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ ...form }),
-        });
+        const response = await fetch(
+          "https://neural-art-ai.vercel.app/api/v1/post",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ ...form }),
+          }
+        );
 
         await response.json();
         navigate("/");

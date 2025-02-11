@@ -52,7 +52,7 @@ const LoginRegister = () => {
       return;
     }
 
-    const url = "http://localhost:8080/api/v1/auth";
+    const url = "https://neural-art-ai.vercel.app/api/v1/auth";
     const userData = isLogin
       ? { email, password, isLogin: true }
       : { name, email, password, isLogin: false };
@@ -61,7 +61,7 @@ const LoginRegister = () => {
       const response = await fetch(url, {
         method: "POST",
         headers: {
-          "Content-Type": "application/json", 
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(userData),
       });
@@ -75,7 +75,7 @@ const LoginRegister = () => {
         window.location.href = "/";
       } else {
         console.error(`${isLogin ? "Login" : "Register"} failed`, data.message);
-        setError(data.message || "Something went wrong. Please try again."); 
+        setError(data.message || "Something went wrong. Please try again.");
       }
     } catch (error) {
       console.error("Error:", error);
@@ -89,7 +89,7 @@ const LoginRegister = () => {
     setEmail("");
     setPassword("");
     setShowPassword(false);
-    setError(""); 
+    setError("");
   };
 
   return (
@@ -199,5 +199,3 @@ const LoginRegister = () => {
 };
 
 export default LoginRegister;
-
-
