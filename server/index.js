@@ -18,24 +18,32 @@ app.use(
   })
 );
 app.use(express.json({ limit: "50mb" }));
+
 app.use("/api/v1/post", postRoutes);
 app.use("/api/v1/model", modelRoutes);
 app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/users", userRoutes);
 
-app.get("/", async (req, res) => {
-  res.send("Hello from server");
+app.get("/", (req, res) => {
+  res.send("Hello from NeuralArt AI backend!");
 });
 
-const startserver = async () => {
+// Define PORT for Render
+const PORT = process.env.PORT || 8080;
+
+// Start Server
+const startServer = async () => {
   try {
-    connectDB(process.env.MONGODB_URL);
-    app.listen(8080, () => {
-      console.log("Server is running on https://neural-art-ai.vercel.app");
+    await connectDB(process.env.MONGODB_URL);
+    console.log("Connected to MongoDB successfully");
+
+    app.listen(PORT, () => {
+      console.log(`Server is running on port ${PORT}`);
     });
   } catch (error) {
-    console.log(error);
+    console.error("MongoDB Connection Error:", error);
+    process.exit(1);
   }
 };
 
-startserver();
+startServer();
